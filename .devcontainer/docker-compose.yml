@@ -1,0 +1,34 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+      args:
+        HTTP_PROXY: ${HTTP_PROXY-}
+        HTTPS_PROXY: ${HTTPS_PROXY-}
+        NO_PROXY: ${NO_PROXY-}
+    environment:
+      - HTTP_PROXY=${HTTP_PROXY-}
+      - HTTPS_PROXY=${HTTPS_PROXY-}
+      - NO_PROXY=${NO_PROXY-}
+      - http_proxy=${HTTP_PROXY-}
+      - https_proxy=${HTTPS_PROXY-}
+      - no_proxy=${NO_PROXY-}
+      - UV_LINK_MODE=copy
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy 
+    depends_on:
+      - dynamodb-local
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+  dynamodb-local:
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    image: "amazon/dynamodb-local:latest"
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    volumes:
+      - "../dynamodb/data:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
