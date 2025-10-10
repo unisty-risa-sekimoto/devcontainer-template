@@ -1,6 +1,6 @@
 FROM python:3.13
 
-RUN pip install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 RUN apt-get update && apt-get install -y \
     sudo \
