@@ -16,8 +16,9 @@ services:
       - https_proxy=${HTTPS_PROXY-}
       - no_proxy=${NO_PROXY-}
       - UV_LINK_MODE=copy
-      - AWS_ACCESS_KEY_ID=dummy
-      - AWS_SECRET_ACCESS_KEY=dummy 
+      - AWS_ACCESS_KEY_ID=minio
+      - AWS_SECRET_ACCESS_KEY=minio123
+      - AWS_EC2_METADATA_DISABLED=true
     depends_on:
       - dynamodb-local
     volumes:
@@ -32,3 +33,18 @@ services:
     volumes:
       - "../dynamodb/data:/home/dynamodblocal/data"
     working_dir: /home/dynamodblocal
+  minio:
+    image: "minio/minio:latest"
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+      - AWS_EC2_METADATA_DISABLED=true
+    profiles:
+      - s3
+    command: "server /export --address :9000 --console-address :9001"
+    volumes:
+        - "../minio/data:/export"
+    ports:
+        - "9000:9000"
+        - "9001:9001"

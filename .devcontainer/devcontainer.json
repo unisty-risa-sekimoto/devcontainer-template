@@ -3,6 +3,7 @@
   "dockerComposeFile": "./docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  // "dockerComposeServiceSelectors": ["s3"],
   "remoteUser": "vscode",
   "customizations": {
     "vscode": {
