@@ -5,36 +5,60 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "boto3>=1.40.45",
     "fastapi[standard]>=0.116.1",
+    "pydantic-settings>=2.11.0",
+    "structlog>=25.4.0",
 ]
 
 [dependency-groups]
 dev = [
+    "boto3-stubs[dynamodb]>=1.40.45",
+    "pyright>=1.1.406",
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
+    "pytest-env>=1.1.5",
     "ruff>=0.13.0",
 ]
 
+[tool.ruff]
+line-length = 88
+indent-width = 4
+target-version = "py313"
+
 [tool.ruff.lint]
 select = [
-    # https://docs.astral.sh/ruff/rules/
-    "E",   # pycodestyle error
-    "F",   # Pyflakes
-    "N",   # pep8-naming
-    "ANN", # flake8-annotations
+    "E",  # pycodestyle error
+    "W",  # pycodestyle warnings
+    "F",  # Pyflakes
+    "N",  # pep8-naming
+    "B",  # bugbear
+    "UP",  # pyupgrade
+    "ANN",  # flake8-annotations
 ]
+
+ignore = [
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "ANN101",  # ignore type hints for 'self'
+    "ANN102",  # ignore type hints for 'cls'
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
 
 [tool.pytest.ini_options]
 pythonpath = "."
 addopts = "--cov=app --cov-report=term-missing --cov-report=html --cov-report=xml"
 
+[tool.pytest_env]
+ENV_FILE = ".env.test"
+
 [tool.coverage.run]
-source = [
-    "app",
-]
-omit = [
-    "tests/*",
-]
+source = ["app"]
+omit = ["tests/*"]
 
 [tool.coverage.report]
 show_missing = true
@@ -44,3 +68,9 @@ directory = "coverage-html"
 
 [tool.coverage.xml]
 output = "coverage.xml"
+
+[tool.pyright]
+include = ["app", "tests"]
+exclude = ["**/__pycache__", ".venv"]
+typeCheckingMode = "standard"
+pythonVersion = "3.13"
