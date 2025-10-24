@@ -13,13 +13,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "ruff>=0.13.0",
+    "boto3-stubs[dynamodb]>=1.40.45",
     "pyright>=1.1.406",
     "pytest>=8.4.2",
     "pytest-cov>=7.0.0",
     "pytest-env>=1.1.5",
-    "boto3-stubs[dynamodb]>=1.40.45",
-    # "moto[dynamodb]>=5.1.13", # CI/テスト用
+    "ruff>=0.13.0",
 ]
 
 [tool.ruff]
@@ -29,23 +28,23 @@ target-version = "py313"
 
 [tool.ruff.lint]
 select = [
-    # https://docs.astral.sh/ruff/rules/
-    "E",   # pycodestyle error
-    "F",   # Pyflakes
-    "N",   # pep8-naming
-    "ANN", # flake8-annotations
-    #"UP",  # pyupgrade
-    #"B",   # bugbear
+    "E",  # pycodestyle error
+    "W",  # pycodestyle warnings
+    "F",  # Pyflakes
+    "N",  # pep8-naming
+    "B",  # bugbear
+    "UP",  # pyupgrade
+    "ANN",  # flake8-annotations
 ]
 
 ignore = [
-    "ANN101",  # self に型アノテーション不要
-    "ANN102",  # cls に型アノテーション不要
+    "E501",  # line too long, handled by black
+    "B008",  # do not perform function calls in argument defaults
+    "ANN101",  # ignore type hints for 'self'
+    "ANN102",  # ignore type hints for 'cls'
 ]
-fix = true
 
 [tool.ruff.format]
-# Black互換設定
 quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
@@ -74,6 +73,4 @@ output = "coverage.xml"
 include = ["app", "tests"]
 exclude = ["**/__pycache__", ".venv"]
 typeCheckingMode = "standard"
-reportMissingImports = true
-reportMissingTypeStubs = false
 pythonVersion = "3.13"
