@@ -1,1 +1,19 @@
-/dynamodb/data/*
+
+# Python Caches and Environments
+__pycache__/
+*.pyc
+.venv/
+
+# Development Tools and Caches
+.ruff_cache/
+
+# Test Artifacts
+.pytest_cache/
+.coverage
+coverage.xml
+coverage-html/
+
+
+# Configurations and Data
+.env*
+/dynamodb/data
