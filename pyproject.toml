@@ -25,6 +25,7 @@ dev = [
 line-length = 88
 indent-width = 4
 target-version = "py313"
+fix = false  # set to 'true' for local development to automatically apply fixes
 
 [tool.ruff.lint]
 select = [
@@ -38,7 +39,7 @@ select = [
 ]
 
 ignore = [
-    "E501",  # line too long, handled by black
+    "E501",  # line too long, handled by [tool.ruff.format] rules
     "B008",  # do not perform function calls in argument defaults
     "ANN101",  # ignore type hints for 'self'
     "ANN102",  # ignore type hints for 'cls'
