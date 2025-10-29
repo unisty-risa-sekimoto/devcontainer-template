@@ -13,7 +13,5 @@ __pycache__/
 coverage.xml
 coverage-html/
 
-
-# Configurations and Data
-.env*
+# Data
 /dynamodb/data
