@@ -25,7 +25,7 @@ dev = [
 line-length = 88
 indent-width = 4
 target-version = "py313"
-fix = false  # set to 'true' for local development to automatically apply fixes
+fix = false  # to automatically apply fixes during local development, set this to 'true'
 
 [tool.ruff.lint]
 select = [
