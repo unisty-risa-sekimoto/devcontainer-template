@@ -41,8 +41,6 @@ select = [
 ignore = [
     "E501",  # line too long, handled by [tool.ruff.format] rules
     "B008",  # do not perform function calls in argument defaults
-    "ANN101",  # ignore type hints for 'self'
-    "ANN102",  # ignore type hints for 'cls'
 ]
 
 [tool.ruff.format]
