@@ -1,6 +1,19 @@
 # devcontainer-template
 
-## 1. Lint / Format (Ruff)
+FastAPI + DynamoDB の開発環境テンプレートです。
+
+## 1. リポジトリ構成
+
+| ファイル/ディレクトリ | 役割                     | 詳細                                                                                               |
+|:----------------------|:-------------------------|:---------------------------------------------------------------------------------------------------|
+| `.devcontainer/`      | 開発コンテナの構成定義   | VS Code の Dev Containers 機能の設定ファイル群。コンテナビルド時の依存関係や拡張機能の導入を定義。 |
+| `.vscode/`            | ワークスペース設定       | VS Code 全体で共有される設定（拡張機能、フォーマッタ、Lint 実行ルールなど）を定義。                |
+| `.env`                | 環境変数ファイル         | DynamoDB Local への接続情報を設定済み。                                                            |
+| `pyproject.toml`      | プロジェクト設定         | Python の依存関係、Ruff / Pyright / pytest / coverage などの設定を一元管理。                          |
+| `uv.lock`             | 依存関係のバージョン固定 | `uv` により解決されたライブラリのバージョンを固定。                                                |
+
+
+## 2. Lint / Format (Ruff)
 
 Ruff を使用してコードを静的解析します。  
 
@@ -56,7 +69,7 @@ uv run ruff check --fix
 uv run ruff format
 ```
 
-## 2. 型安全性 (Pyright)
+## 3. 型安全性 (Pyright)
 
 Pyright により、静的型チェックを実施します。  
 型アノテーションを必須とし、関数・クラス・変数の型安全性を担保します。  
@@ -74,7 +87,7 @@ Pyright により、静的型チェックを実施します。
 uv run pyright
 ```
 
-## 3. テスト（pytest）
+## 4. テスト（pytest）
 
 単体テストは `pytest`、カバレッジ測定は `coverage` により実施します。  
 カバレッジ結果は、`coverage.xml` と `coverage-html/` にレポート出力されます。
